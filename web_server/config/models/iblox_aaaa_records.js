@@ -12,6 +12,7 @@
  * governing permissions and limitations under the License.
  */
 
+const mongoSanitize = require('express-mongo-sanitize');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -45,7 +46,7 @@ module.exports = {
     },
     getIBIPv6AddrByNamePromise: function (name) {
         return ipv6AddrModel.find({
-            'name': name,
+            'name': mongoSanitize.sanitize({ data: name }).data,
         }).exec();
     },
     getIBIPv6AddrByIPPromise: function (ip) {
