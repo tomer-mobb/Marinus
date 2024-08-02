@@ -12,6 +12,7 @@
  * governing permissions and limitations under the License.
  */
 
+const mongoSanitize = require('express-mongo-sanitize');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -47,7 +48,7 @@ module.exports = {
         return deadDnsModel.find(query).exec();
     },
     getDeadDNSByDomainPromise: function (domain, source) {
-        let query = { 'fqdn': domain };
+        let query = { 'fqdn': mongoSanitize.sanitize({ data: domain }).data };
         if (source != null) {
             query['sources.source'] = source;
         }
