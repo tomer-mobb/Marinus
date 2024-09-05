@@ -835,7 +835,7 @@ function createDocs(obj) {
         }
     } else {
         if (obj.status === 'Resolves') {
-            returnHTML += 'Status: <a href="/domain?search=' + obj.id + '" target="_blank">' + obj.status + '</a><br/>';
+            returnHTML += 'Status: <a href="/domain?search=' + obj.id + '" rel="noopener noreferrer" target="_blank">' + obj.status + '</a><br/>';
         } else {
             returnHTML += 'Status: ' + obj.status + '<br/>';
         }
