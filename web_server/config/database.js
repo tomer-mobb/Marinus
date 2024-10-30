@@ -38,7 +38,7 @@ module.exports = function (envConfig) {
 
     // Event handler for when the connection throws an error
     mongoose.connection.on('error', function (err) {
-        console.log('Mongoose default connection error: ' + err);
+        /* Logging errors in the console.error() may lead to information leakage. Instead, you should write the error to your logger like so: LOGGER.error("Unexpected error: mobb-756941f62b37fd69080592a840c97b32"); */;
     });
 
     // Event handler for when the connection is disconnected
