@@ -27,13 +27,6 @@ const marinusConfig = require('../config/models/config.js')
 
 const statusValues = ['confirmed', 'unconfirmed', 'false_positive', 'expired'];
 
-/**
- * Generates a random string of hex characters that is len characters long.
- * It will have the security of a len/2 password
- *
- * @param {Number} len The length of the API key to generate.
- * @return {String} A string representing len # of random bytes.
- */
 function createAPIKey(len) {
     return crypto.randomBytes(Math.ceil(len / 2))
         .toString('hex') // convert to hexadecimal format
