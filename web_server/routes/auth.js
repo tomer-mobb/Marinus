@@ -17,6 +17,13 @@ const router = express.Router();
 const group = require('../config/models/group');
 const user = require('../config/models/user');
 
+function validateProtocol(url) {
+    if (!["http", "https"].includes(new URL(url).protocol)) {
+        throw new Error('Potential open redirect attempt');
+    }
+    return url;
+}
+
 module.exports = function (envConfig, passport) {
     router.route('/logout')
         .get(function (req, res) {
@@ -123,7 +130,7 @@ module.exports = function (envConfig, passport) {
                                 req.session.groups.push(data[i]['name']);
                             }
                             if (req.session.returnPath) {
-                                res.redirect('/' + decodeURIComponent(req.session.returnPath).slice(1));
+                                res.redirect(validateProtocol('/' + decodeURIComponent(req.session.returnPath).slice(1)));
                             } else {
                                 res.redirect('/');
                             }
