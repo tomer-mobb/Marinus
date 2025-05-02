@@ -12,6 +12,7 @@
  * governing permissions and limitations under the License.
  */
 
+const mongoSanitize = require('express-mongo-sanitize');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -137,7 +138,7 @@ module.exports = {
   },
   getCertTransIssuers: function (issuer, count, excludeExpired) {
     let promise;
-    let query = { 'issuer_common_name': issuer }
+    let query = { 'issuer_common_name': mongoSanitize.sanitize({ data: issuer }).data }
     if (excludeExpired != null && excludeExpired === true) {
       query['isExpired'] = false;
     }
