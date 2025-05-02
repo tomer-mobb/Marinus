@@ -43,7 +43,7 @@ module.exports = {
             }).exec();
         } else {
             promise = userModel.findOne({
-                'userid': userid,
+                'userid': mongoSanitize.sanitize({ data: userid }).data,
             }).exec();
         }
         return promise;
@@ -55,7 +55,7 @@ module.exports = {
         let promise;
         if (isActive) {
             promise = userModel.findOne({
-                'apiKey': apiKey,
+                'apiKey': mongoSanitize.sanitize({ data: apiKey }).data,
                 'status': 'active',
             }).exec();
         } else {
