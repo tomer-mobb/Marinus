@@ -286,7 +286,7 @@ module.exports = {
         if (zone) {
             query = {
                 'type': 'cname',
-                'value': { '$regex': reSearch },
+                'value': mongoSanitize.sanitize({ data: { '$regex': reSearch } }).data,
                 'zone': zone,
             };
             if (source != null) {
