@@ -153,7 +153,7 @@ module.exports = {
     let foo = [];
     foo.push(org);
     return certTransModel.countDocuments({
-      'subject_organization_name': { '$in': foo },
+      'subject_organization_name': mongoSanitize.sanitize({ data: { '$in': foo } }).data,
       'isExpired': false,
     }).exec();
   },
